@@ -17,7 +17,7 @@ am_vector = model.base_model.embeddings.word_embeddings(enc_input["input_ids"]).
 mask_vector = model.base_model.embeddings.word_embeddings(enc_input["input_ids"]).detach().numpy()[0][mask_index]
 
 # Extract the top-5 word predictions for "am" and "<mask>" and their probabilities
-am_predictions = unmasker(f"I {tokenizer.mask_token} so")
+am_predictions = unmasker(f"I {tokenizer.mask_token} so", top_k=5)
 mask_predictions = unmasker(f"I am so {tokenizer.mask_token}")
 
 print("Top-5 word predictions for 'am':")
