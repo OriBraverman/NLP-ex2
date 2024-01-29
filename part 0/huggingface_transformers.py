@@ -45,7 +45,7 @@ word = "Ġate"
 word_vector1 = get_word_vector_from_sentence(sentence1, word)
 word_vector2 = get_word_vector_from_sentence(sentence2, word)
 
-print(f"Cosine similarity between '{sentence1}' and '{sentence2}': "
+print(f"Cosine similarity using the word ate between '{sentence1}' and '{sentence2}': "
       f"{cosine_similarity(word_vector1, word_vector2)}\n")
 
 # 3) Find two sentences that share the same word,
@@ -57,7 +57,7 @@ word = "Ġapple"
 word_vector1 = get_word_vector_from_sentence(sentence1, word)
 word_vector2 = get_word_vector_from_sentence(sentence2, word)
 
-print(f"Cosine similarity between '{sentence1}' and '{sentence2}': "
+print(f"Cosine similarity using the word apple between '{sentence1}' and '{sentence2}': "
         f"{cosine_similarity(word_vector1, word_vector2)}\n")
 
 # 4) Find a sentence with n words, that is tokenized into m > n tokens by the tokenizer.
