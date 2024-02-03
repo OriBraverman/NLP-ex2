@@ -3,8 +3,8 @@ from collections import Counter
 
 #  Constants
 TRAIN_DATA_PATH = "data/ass1-tagger-train"
-TEST_DATA_PATH = "data/ass1-tagger-test-input"
-OUTPUT_PATH = "output/part1.1.txt"
+TEST_DATA_PATH = "data/ass1-tagger-dev-input"
+OUTPUT_PATH = "output/part1.1-dev-output.txt"
 
 def create_output_file(output_path):
     if not os.path.exists("output"):
