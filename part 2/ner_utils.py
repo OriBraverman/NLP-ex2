@@ -35,7 +35,7 @@ def tag_test_data(test_data,emb_model, clf, pca):
                 tag = clf.predict(reduce_dim_infer(pca, [emb_model[word[0]]]))[0]
             else:
                 tag = "O"
-            tagged_data.append((word, tag))
+            tagged_data.append((word[0], tag))
     return tagged_data
 def main():
     google_model = dl.load("word2vec-google-news-300")
