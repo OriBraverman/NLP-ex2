@@ -3,6 +3,8 @@ import gensim.downloader as dl
 from collections import Counter
 from sklearn.neighbors import KNeighborsClassifier
 from dim_reduction_utils import reduce_dim_fit, reduce_dim_infer
+import sys
+import codecs
 
 def read_data(fname):
     for line in codecs.open(fname):
