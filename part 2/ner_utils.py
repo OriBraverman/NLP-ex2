@@ -27,15 +27,21 @@ def train_knn(train_data,model):
     knn = KNeighborsClassifier(n_neighbors=10)
     knn.fit(X, labels)
     return knn, pca
-def tag_test_data(test_data,emb_model, clf, pca):
+def tag_test_data(test_data,emb_model, clf, pca,output_file):
     tagged_data = []
-    for line in test_data:
-        for word in line:
-            if word[0] in emb_model:
-                tag = clf.predict(reduce_dim_infer(pca, [emb_model[word[0]]]))[0]
-            else:
-                tag = "O"
-            tagged_data.append((word[0], tag))
+    with open(output_file,'w') as f:
+        tagged_lines=[]
+        for line in test_data:
+            tagged_line = ""
+            for word in line:
+                if word[0] in emb_model:
+                    tag = clf.predict(reduce_dim_infer(pca, [emb_model[word[0]]]))[0]
+                else:
+                    tag = "O"
+                tagged_line+=f'{word}/{tag}'
+                tagged_data.append((word[0], tag))
+                tagged_lines.append(tagged_line)
+        f.writelines(tagged_lines)
     return tagged_data
 def main():
     google_model = dl.load("word2vec-google-news-300")
@@ -43,7 +49,8 @@ def main():
     test_path = './ner/test.blind'
     tagged_data = read_data(train_path)
     clf, dim_red = train_knn(tagged_data,model=google_model)
-    test=tag_test_data(read_data(test_path),emb_model=google_model,clf=clf,pca=dim_red)
+    test=tag_test_data(read_data(test_path),emb_model=google_model,clf=clf,pca=dim_red,output_file='predicted_file')
+    train=tag_test_data(read_data(train_path),emb_model=google_model,clf=clf,pca=dim_red,output_file='train_pred')
     print(test)
 if __name__=='__main__':
     main()
